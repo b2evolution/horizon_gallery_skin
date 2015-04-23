@@ -46,22 +46,6 @@ siteskin_include( '_site_body_header.inc.php' );
 // ------------------------------- END OF SITE HEADER --------------------------------
 ?>
 
-<div class="PageTop">
-	<?php
-		// Display container and contents:
-		skin_container( NT_('Page Top'), array(
-				// The following params will be used as defaults for widgets included in this container:
-				'block_start' => '<div class="widget $wi_class$">',
-				'block_end' => '</div>',
-				'block_display_title' => false,
-				'list_start' => '<ul>',
-				'list_end' => '</ul>',
-				'item_start' => '<li>',
-				'item_end' => '</li>',
-			) );
-	?>
-</div>
-
 <div class="pageHeader">
 
 	<h1 id="pageTitle"><a href="<?php $Blog->disp( 'url', 'raw' ) ?>"><?php $Blog->disp( 'name', 'htmlbody' ) ?></a></h1>
@@ -76,7 +60,7 @@ siteskin_include( '_site_body_header.inc.php' );
 		) );
 	?>
 
-	<div class="top_menu floatright">
+	<div class="top_menu">
 		<?php
 			// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
 			// Display container and contents:
@@ -87,9 +71,9 @@ siteskin_include( '_site_body_header.inc.php' );
 					'block_display_title' => false,
 					'list_start'          => '',
 					'list_end'            => '',
-					'item_start'          => ' <span class="menu_link">',
+					'item_start'          => ' <span class="menu">',
 					'item_end'            => '</span> ',
-					'item_selected_start' => ' <span class="menu_link">',
+					'item_selected_start' => ' <span class="menu">',
 					'item_selected_end'   => '</span>',
 					'item_title_before'   => '',
 					'item_title_after'    => '',
@@ -101,12 +85,28 @@ siteskin_include( '_site_body_header.inc.php' );
 	<div class="clear"></div>
 </div>
 
+<div class="PageTop container">
+	<?php
+		// Display container and contents:
+		skin_container( NT_('Page Top'), array(
+				// The following params will be used as defaults for widgets included in this container:
+				'block_start' => '<div class="widget $wi_class$">',
+				'block_end' => '</div>',
+				'block_display_title' => false,
+				'list_start' => '<ul>',
+				'list_end' => '</ul>',
+				'item_start' => '<li>',
+				'item_end' => '</li>',
+			) );
+	?>
+</div>
 <?php
 if( $disp == 'single' )
 { // ------------------- NAVIGATION BAR FOR ALBUM(POST) -------------------
 	if( $single_Item = & mainlist_get_item() )
 	{ // Get Item here, because it can be not defined yet, e.g. in Preview mode
 ?>
+
 <div class="nav_album">
 
 	<a href="<?php $Blog->disp( 'url', 'raw' ) ?>" id="ios-arrow-left" title="<?php echo format_to_output( T_('All Albums'), 'htmlattr' ); ?>"></a>
@@ -162,7 +162,7 @@ if( $disp == 'single' )
 	}
 } // ------------------- END OF NAVIGATION BAR FOR ALBUM(POST) ------------------- ?>
 
-<div class="bPosts<?php echo in_array( $disp, array( 'catdir', 'posts', 'single', 'page', 'mediaidx' ) ) ? ' full_width' : '' ?>">
+<div class="bPosts<?php echo in_array( $disp, array( 'catdir', 'posts', 'single', 'page', 'mediaidx' ) ) ? '' : '' ?>">
 
 <!-- =================================== START OF MAIN AREA =================================== -->
 

@@ -29,7 +29,7 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
 			// Display a link to contact the owner of this blog (if owner accepts messages):
 			$Blog->contact_link( array(
 					'before'      => '',
-					'after'       => ' | ',
+					'after'       => ' &bull; ',
 					'text'   => T_('Contact'),
 					'title'  => T_('Send a message to the owner of this blog...'),
 				) );
@@ -43,9 +43,9 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
 		if( $Blog->get_setting( 'feed_content' ) != 'none' )
 		{
 		?>
-			|
-			<a href="<?php $Blog->disp( 'rss2_url', 'raw' ) ?>">RSS 2.0</a> /
-			<a href="<?php $Blog->disp( 'atom_url', 'raw' ) ?>"><?php echo T_('Atom Feed') ?></a> /
+			&bull; 
+			<a href="<?php $Blog->disp( 'rss2_url', 'raw' ) ?>">RSS 2.0</a>  &bull; 
+			<a href="<?php $Blog->disp( 'atom_url', 'raw' ) ?>"><?php echo T_('Atom Feed') ?></a>  &bull; 
 			<a href="http://webreference.fr/2006/08/30/rss_atom_xml" title="External - English"><?php echo T_('What is RSS?') ?></a>
 		<?php
 		}
@@ -58,7 +58,7 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
 			// Display footer text (text can be edited in Blog Settings):
 			$Blog->footer_text( array(
 					'before'      => '',
-					'after'       => ' | ',
+					'after'       => ' &bull; ',
 				) );
 		?>
 
@@ -69,7 +69,7 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
 			if( ! credits( array(
 					'list_start'  => '',
 					'list_end'    => '',
-					'separator'   => ' | ',
+					'separator'   => ' &bull; ',
 					'item_start'  => ' ',
 					'item_end'    => ' ',
 				) ) )
