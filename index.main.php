@@ -47,9 +47,27 @@ siteskin_include( '_site_body_header.inc.php' );
 ?>
 
 <div class="pageHeader">
-
+	
 	<h1 id="pageTitle"><a href="<?php $Blog->disp( 'url', 'raw' ) ?>"><?php $Blog->disp( 'name', 'htmlbody' ) ?></a></h1>
 
+	
+
+		<div class="PageTop container">
+		<?php
+			// Display container and contents:
+			skin_container( NT_('Page Top'), array(
+					// The following params will be used as defaults for widgets included in this container:
+					'block_start' => '<div class="widget $wi_class$">',
+					'block_end' => '</div>',
+					'block_display_title' => false,
+					'list_start' => '<ul>',
+					'list_end' => '</ul>',
+					'item_start' => '<li>',
+					'item_end' => '</li>',
+				) );
+		?>
+	</div>
+	
 	<?php
 		skin_widget( array(
 			// CODE for the widget:
@@ -59,7 +77,7 @@ siteskin_include( '_site_body_header.inc.php' );
 			'after'  => ')',
 		) );
 	?>
-
+	
 	<div class="top_menu">
 		<?php
 			// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
@@ -85,21 +103,6 @@ siteskin_include( '_site_body_header.inc.php' );
 	<div class="clear"></div>
 </div>
 
-<div class="PageTop container">
-	<?php
-		// Display container and contents:
-		skin_container( NT_('Page Top'), array(
-				// The following params will be used as defaults for widgets included in this container:
-				'block_start' => '<div class="widget $wi_class$">',
-				'block_end' => '</div>',
-				'block_display_title' => false,
-				'list_start' => '<ul>',
-				'list_end' => '</ul>',
-				'item_start' => '<li>',
-				'item_end' => '</li>',
-			) );
-	?>
-</div>
 <?php
 if( $disp == 'single' )
 { // ------------------- NAVIGATION BAR FOR ALBUM(POST) -------------------
@@ -137,16 +140,16 @@ if( $disp == 'single' )
 	// ------------------- PREV/NEXT POST LINKS (SINGLE POST MODE) -------------------
 	item_prevnext_links( array(
 			'template' => '$prev$$next$',
-			'block_start' => '<div class="roundbutton_group nav_album_arrows">',
-			'next_class' => 'roundbutton rbtn_black',
+			'block_start' => '<div class="nav_album_arrows">',
+			'next_class' => 'fa-arrow-circle-right',
 			'next_start'  => '',
-			'next_text' => get_icon( 'arrow_right_white' ),
-			'next_no_item' => '<span class="roundbutton rbtn_black">'.get_icon( 'arrow_right_grey' ).'</span>',
+			'next_text' => get_icon( '' ),
+			'next_no_item' => '',
 			'next_end'    => '',
-			'prev_class' => 'roundbutton rbtn_black',
+			'prev_class' => 'fa-arrow-circle-o-left',
 			'prev_start'  => '',
-			'prev_text' => get_icon( 'arrow_left_white' ),
-			'prev_no_item' => '<span class="roundbutton rbtn_black">'.get_icon( 'arrow_left_grey' ).'</span>',
+			'prev_text' => get_icon( '' ),
+			'prev_no_item' => '',
 			'prev_end'    => '',
 			'block_end'   => '</div>',
 		) );
