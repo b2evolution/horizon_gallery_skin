@@ -146,6 +146,9 @@ img.loadimg {
 .bCommentSmallPrint a:nth-child(2):hover:before {
 	color: red;
 }
+.bCommentSmallPrint .datetime:before {
+	content:'' !important;
+}
 a.datetime {
 	font-size: 15.3px;
 	color: rgba(119,119,119, 1);
@@ -465,7 +468,22 @@ h3.bTitle, h3.bTitle.linked a {
 #ffield_g {
 	margin-top: 8px;
 }
-input.bComment,
+input.bComment {
+	background-color: #fff;
+	width: 97%;
+	padding: 6px 12px !important;
+	margin: 0px;
+	margin-top: -6px !important;
+	font-size: 14px;
+	font-family: 'Source Sans Pro', sans-serif;
+	line-height: 2em;
+    background-image: none;
+    border: 1px solid #ccc !important;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset !important;
+    color: #555;
+	overflow: auto !important;
+}
 textarea.bComment
 {
 	background-color: #fff;
@@ -826,6 +844,10 @@ div.bCommentTitle {
 	font-style: italic;
 	font-weight: 500;
 	text-transform: uppercase;
+}
+div.bCommentTitle:before {
+	content:'COMMENT FROM: ';
+	font-style: italic;
 }
 .info strong {
 	margin-left: -60px;
