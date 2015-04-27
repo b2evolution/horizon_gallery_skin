@@ -18,8 +18,8 @@ global $Skin;
 
 // Default params:
 $params = array_merge( array(
-		'comment_start'        => '<div class="bComment">',
-		'comment_end'          => '</div>',
+		'comment_start'        => '',
+		'comment_end'          => '',
 		'link_to'              => 'userurl>userpage', // 'userpage' or 'userurl' or 'userurl>userpage' or 'userpage>userurl'
 		'author_link_text'     => 'name', // avatar_name | avatar_login | only_avatar | name | login | nickname | firstname | lastname | fullname | preferredname
 		'before_image'         => '<div class="image_block">',

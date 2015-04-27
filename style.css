@@ -167,6 +167,9 @@ div.pageHeader {
 	z-index: -1;
 	margin-top: -36px;
 }
+.PageTop.container {
+	padding-bottom: 90px;
+}
 .container {
 	max-width: 960px !important;
 	margin: 0 auto !important;
@@ -175,12 +178,26 @@ div.pageHeader {
 	margin-bottom: 0px;
 }
 h1#pageTitle {
-	padding: 125px 0px 0px 0px;
+	padding: 11% 0px 0px 0px;
 	color: #fff;
     font-size: 55px;
     letter-spacing: 5px;
     pointer-events: none;
     text-shadow: 1px 1px rgba(0,0,0,0.2);
+	font-weight: normal;
+	margin-bottom: 0px;
+}
+.widget_core_coll_tagline {
+	font-size: 22px;
+  font-style: italic;
+  color: #fff;
+  text-shadow: 1px 1px rgba(0,0,0,0.2);
+  max-width: 400px;
+  margin: 0 auto;
+  padding-top: 5px;
+  border-top: 1px solid rgba(0,0,0,0.2);
+  font-family: serif;
+  padding-bottom: 15px;
 }
 h1 a {
 	color: #fff;
@@ -196,7 +213,6 @@ h1 a {
 	padding: 0px 10px;
 	margin: 0 auto;
 	max-width: 960px;
-	
 }
 .bPosts.full_width {
 	max-width: 100%;
@@ -280,6 +296,11 @@ h1 a {
 	margin: 25px 44px;
 	vertical-align: top;
 }
+.posts_list .bPost {
+	display: inline-block;
+	margin: 25px 44px 0px 44px;
+	vertical-align: top;
+}
 .posts_list .bPost a {
 	font-weight: bold;
 }
@@ -333,6 +354,11 @@ div.action_messages {
 .bPostContent {
 	vertical-align: top;
 	text-align: left;
+}
+.bPostContent .bDetails .content_full .bText {
+	margin-left: 20px;
+	padding-left: 10px;
+	border-left: 2px solid #5d4a55;
 }
 .bPostContent .bDetails {
 	max-width: 960px;
@@ -401,9 +427,31 @@ div.mediajs_block, div.videojs_block, div.flowplayer_block {
 	.nav_album_number, .nav_album_arrows {
 		display: none;
 	}
+	.nav_album a {
+		display: inline-block;
+		vertical-align: top;
+		float: none;
+	}
 	.nav_album_title {
+		margin: 0px 10px 0px 0px;
+		margin-left: 0px !important;
+	}
+	.nav_album_title a {
+		vertical-align: top;
+		font-size: 15px;
 		float: right;
-		margin: 0 10px 0 0;
+		margin-right: 20px;
+	}
+	.bPostContent .bDetails .content_full .bText {
+		margin-left: 0px;
+		padding-left: 0px;
+		border-left: 0 solid #5d4a55;
+	}
+	.posts_list .bPost {
+		margin: 25px 10px;
+	}
+	.bPosts h2 {
+		padding-left: 20px;
 	}
 }
 @media only screen and (max-width: 666px) {
@@ -558,13 +606,12 @@ select.bComment  /* Used by the profile form */
 }
 
 .image_index div {
-	background: #555;
-	border: 1px solid #333;
+	background: none;
+	border: none;
 }
 .image_index div:hover {
-	background: #777;
+	background: none;
 }
-
 table.grouped, #edit_group_contacts {
 	color: #000;
 }
@@ -774,6 +821,13 @@ div.tabs div.selected a {
   -webkit-transform: translateX(-10px);
   transform: translateX(-10px);
 }
+#ios-arrow-left:hover, #ios-arrow-left:hover:after {
+	color: #697b94;
+	border-color:  #697b94;
+}
+#ios-arrow-left:hover:before {
+  border-color: transparent #697b94 transparent transparent;
+}
 .form_add_contacts .controls {
 	padding-left: 0;
 }
@@ -886,6 +940,10 @@ img.bCommentAvatar {
 	text-decoration: none !important;
 	padding-top: 30px;
 	padding-bottom: 25px;
+}
+.baseline {
+	padding-left: 30px;
+	padding-right: 30px;
 }
 .baseline a {
 	text-decoration: none !important;
