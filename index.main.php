@@ -1,6 +1,6 @@
 <?php
 /**
- * This is the Horizon_gallery template.
+ * This is the main/default page template.
  *
  * For a quick explanation of b2evo 2.0 skins, please start here:
  * {@link http://b2evolution.net/man/skin-structure}
@@ -8,7 +8,7 @@
  * It is used to display the blog when no specific page template is available to handle the request.
  *
  * @package evoskins
- * @subpackage Horizon_gallery
+ * @subpackage photoalbums
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
@@ -47,83 +47,98 @@ siteskin_include( '_site_body_header.inc.php' );
 ?>
 
 <div class="pageHeader">
-	
-	<h1 id="pageTitle"><a href="<?php $Blog->disp( 'url', 'raw' ) ?>"><?php $Blog->disp( 'name', 'htmlbody' ) ?></a></h1>
-
-	
-
-		<div class="PageTop container">
-		<?php
-			// Display container and contents:
-			skin_container( NT_('Page Top'), array(
-					// The following params will be used as defaults for widgets included in this container:
-					'block_start' => '<div class="widget $wi_class$">',
-					'block_end' => '</div>',
-					'block_display_title' => false,
-					'list_start' => '<ul>',
-					'list_end' => '</ul>',
-					'item_start' => '<li>',
-					'item_end' => '</li>',
-				) );
-		?>
+	<div class="container">
+	<div class="row">
+			<div class="PageTop col-lg-12">
+	<?php
+		// ------------------------- "Page Top" CONTAINER EMBEDDED HERE --------------------------
+		// Display container and contents:
+		skin_container( NT_('Page Top'), array(
+				// The following params will be used as defaults for widgets included in this container:
+				'block_start'         => '<div class="widget $wi_class$">',
+				'block_end'           => '</div>',
+				'block_display_title' => false,
+				'list_start'          => '<ul>',
+				'list_end'            => '</ul>',
+				'item_start'          => '<li>',
+				'item_end'            => '</li>',
+			) );
+		// ----------------------------- END OF "Page Top" CONTAINER -----------------------------
+	?>
+			</div>
+		</div>
 	</div>
 	
 	<?php
-		skin_widget( array(
-			// CODE for the widget:
-			'widget' => 'member_count',
-			// Optional display params
-			'before' => '(',
-			'after'  => ')',
-		) );
+		// ------------------------- "Header" CONTAINER EMBEDDED HERE --------------------------
+		// Display container and contents:
+		skin_container( NT_('Header'), array(
+				// The following params will be used as defaults for widgets included in this container:
+				'block_start'       => '<div class="widget $wi_class$">',
+				'block_end'         => '</div>',
+				'block_title_start' => '<h1>',
+				'block_title_end'   => '</h1>',
+			) );
+		// ----------------------------- END OF "Header" CONTAINER -----------------------------
 	?>
 	
-	<div class="top_menu">
-		<?php
-			// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
-			// Display container and contents:
-			skin_container( NT_('Menu'), array(
-					// The following params will be used as defaults for widgets included in this container:
-					'block_start'         => '',
-					'block_end'           => '',
-					'block_display_title' => false,
-					'list_start'          => '',
-					'list_end'            => '',
-					'item_start'          => ' <span class="menu">',
-					'item_end'            => '</span> ',
-					'item_selected_start' => ' <span class="menu">',
-					'item_selected_end'   => '</span>',
-					'item_title_before'   => '',
-					'item_title_after'    => '',
-				) );
-			// ----------------------------- END OF "Menu" CONTAINER -----------------------------
-		?>
-	</div>
+</div>	
 
-	<div class="clear"></div>
-</div>
-
-<?php
-if( $disp == 'single' )
-{ // ------------------- NAVIGATION BAR FOR ALBUM(POST) -------------------
-	if( $single_Item = & mainlist_get_item() )
-	{ // Get Item here, because it can be not defined yet, e.g. in Preview mode
-?>
-
-<div class="nav_album">
-
-	<a href="<?php $Blog->disp( 'url', 'raw' ) ?>" id="ios-arrow-left" title="<?php echo format_to_output( T_('All Albums'), 'htmlattr' ); ?>"></a>
-
-	<span class="nav_album_title">
+	<!-- BLOG NAVIGATION MENU -->
+<div class="container">
+		<div class="col-md-12">
+			<div class="drop">
+			<input type="checkbox" id="toggle" />
+			<label for="toggle" class="toggle" onclick></label>
+			<ul class="menu">
 	<?php
-		$single_Item->title( array(
-				'link_type' => 'permalink'
+		// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
+		// Display container and contents:
+		// Note: this container is designed to be a single <ul> list
+		skin_container( NT_('Menu'), array(
+				// The following params will be used as defaults for widgets included in this container:
+				'block_start'         => '',
+				'block_end'           => '',
+				'block_display_title' => false,
+				'list_start'          => '',
+				'list_end'            => '',
+				'item_start'          => '<li>',
+				'item_end'            => '</li>',
+				'item_selected_start' => '<li class="active">',
+				'item_selected_end'   => '</li>',
+				'item_title_before'   => '',
+				'item_title_after'    => '',
 			) );
+		// ----------------------------- END OF "Menu" CONTAINER -----------------------------
+	?>
+			</ul>
+		</div>
+		</div>
+</div>
+	
+<div class="container main">
+	<?php
+		if( $disp == 'single' )
+		{ // ------------------- NAVIGATION BAR FOR ALBUM(POST) -------------------
+			if( $single_Item = & mainlist_get_item() )
+			{ // Get Item here, because it can be not defined yet, e.g. in Preview mode
+	?>
+	<div class="nav_album">
+
+		
+
+		<span class="nav_album_title">
+	<?php
 		$single_Item->edit_link( array( // Link to backoffice for editing
-				'before'    => ' ',
+				'before'    => '',
 				'after'     => '',
 				'text'      => get_icon( 'edit' ),
 				'title'     => T_('Edit title/description...'),
+			) );
+		$single_Item->title( array(
+				'link_type' => 'permalink',
+				'before'    => '',
+				'after'     => '',
 			) );
 		if( $Skin->enabled_status_banner( $Item->status ) )
 		{ // Status banner
@@ -134,8 +149,12 @@ if( $disp == 'single' )
 				) );
 		}
 	?>
-	</span>
-
+		</span><!-- ../nav_album_title -->
+	
+	<div class="nav_album_navi">
+		<div class="all_albums_div">
+			<a href="<?php $Blog->disp( 'url', 'raw' ) ?>" title="<?php echo format_to_output( T_('All Albums'), 'htmlattr' ); ?>" class="all_albums hvr-icon-back">All Albums</a>
+		</div>
 <?php
 	// ------------------- PREV/NEXT POST LINKS (SINGLE POST MODE) -------------------
 	item_prevnext_links( array(
@@ -146,7 +165,7 @@ if( $disp == 'single' )
 			'next_text' => get_icon( '' ),
 			'next_no_item' => '',
 			'next_end'    => '',
-			'prev_class' => 'fa-arrow-circle-o-left',
+			'prev_class' => 'fa-arrow-circle-left',
 			'prev_start'  => '',
 			'prev_text' => get_icon( '' ),
 			'prev_no_item' => '',
@@ -155,17 +174,16 @@ if( $disp == 'single' )
 		) );
 	// ------------------------- END OF PREV/NEXT POST LINKS -------------------------
 ?>
+	</div><!-- ../nav_album_navi -->
+		<div class="clear"></div>
+	</div><!-- ../nav_album -->
 
-<div class="nav_album_number">
-<?php printf( T_('%s photos'), $single_Item->get_number_of_images() ); ?>
-</div>
+	<?php
+		}
+	} // ------------------- END OF NAVIGATION BAR FOR ALBUM(POST) ------------------- ?>
 
-<div class="clear"></div></div>
-<?php
-	}
-} // ------------------- END OF NAVIGATION BAR FOR ALBUM(POST) ------------------- ?>
-
-<div class="bPosts<?php echo in_array( $disp, array( 'catdir', 'posts', 'single', 'page', 'mediaidx' ) ) ? '' : '' ?>">
+	<div class="row">
+		<div class="bPosts<?php echo in_array( $disp, array( 'catdir', 'posts', 'single', 'page', 'mediaidx' ) ) ? ' col-lg-12' : '' ?>">
 
 <!-- =================================== START OF MAIN AREA =================================== -->
 
@@ -197,14 +215,14 @@ if( $disp == 'single' )
 		// ------------------------------ END OF REQUEST TITLE -----------------------------
 	}
 	?>
-
+	<div class="clear"></div>
 	<?php
 	// Go Grab the featured post:
 	if( $Item = & get_featured_Item() )
 	{	// We have a featured/intro post to display:
 		// ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
 		skin_include( '_item_block.inc.php', array(
-				'feature_block' => true,
+				'feature_block'=> true,
 				'content_mode' => 'full', // We want regular "full" content, even in category browsing: i-e no excerpt or thumbnail
 				'intro_mode'   => 'normal',	// Intro posts will be displayed in normal mode
 				'item_class'   => 'featured_post',
@@ -258,30 +276,94 @@ if( $disp == 'single' )
 		// copying the matching php file into your skin directory.
 		// ------------------------- END OF MAIN CONTENT TEMPLATE ---------------------------
 	?>
+		</div><!-- ../bPosts col-lg-12 -->
+	</div><!-- ../row -->
+
+	<?php
+	if( $disp != 'catdir' )
+	{ // Don't display the pages on disp=catdir because we don't have a limit by page there
+		// -------------------- PREV/NEXT PAGE LINKS (POST LIST MODE) --------------------
+		mainlist_page_links( array(
+				'block_start' => '<div class="nav_pages">',
+				'block_end' => '</div>',
+				'prev_text' => '&lt;&lt;',
+				'next_text' => '&gt;&gt;',
+			) );
+		// ------------------------- END OF PREV/NEXT PAGE LINKS -------------------------
+	}
+	?>
+</div><!-- ../container MAIN -->
+
+<!-- =================================== START OF FOOTER =================================== -->
+<div class="footer-wrapper">
+	<div class="container">
+	<div class="row">
+		<div class="col-md-12 center">
+	<?php
+		// Display container and contents:
+		skin_container( NT_("Footer"), array(
+				// The following params will be used as defaults for widgets included in this container:
+			) );
+		// Note: Double quotes have been used around "Footer" only for test purposes.
+	?>
+	<p>
+		<?php
+			// Display footer text (text can be edited in Blog Settings):
+			$Blog->footer_text( array(
+					'before'      => '',
+					'after'       => ' &bull; ',
+				) );
+
+		// TODO: dh> provide a default class for pTyp, too. Should be a name and not the ityp_ID though..?!
+		?>
+
+		<?php
+			// Display a link to contact the owner of this blog (if owner accepts messages):
+			$Blog->contact_link( array(
+					'before'      => '',
+					'after'       => ' &bull; ',
+					'text'   => T_('Contact'),
+					'title'  => T_('Send a message to the owner of this blog...'),
+				) );
+			// Display a link to help page:
+			$Blog->help_link( array(
+					'before'      => ' ',
+					'after'       => ' ',
+					'text'        => T_('Help'),
+				) );
+		?>
+
+		<?php
+			// Display additional credits:
+			// If you can add your own credits without removing the defaults, you'll be very cool :))
+			// Please leave this at the bottom of the page to make sure your blog gets listed on b2evolution.net
+			credits( array(
+					'list_start'  => '&bull;',
+					'list_end'    => ' ',
+					'separator'   => '&bull;',
+					'item_start'  => ' ',
+					'item_end'    => ' ',
+				) );
+		?>
+	</p>
+
+	<?php
+		// Please help us promote b2evolution and leave this logo on your blog:
+		powered_by( array(
+				'block_start' => '<div class="powered_by">',
+				'block_end'   => '</div>',
+				// Check /rsc/img/ for other possible images -- Don't forget to change or remove width & height too
+				'img_url'     => '$rsc$img/powered-by-b2evolution-120t.gif',
+				'img_width'   => 120,
+				'img_height'  => 32,
+			) );
+	?>
+
+		</div>
+	</div>
+	</div>
 </div>
-
 <?php
-if( $disp != 'catdir' )
-{ // Don't display the pages on disp=catdir because we don't have a limit by page there
-	// -------------------- PREV/NEXT PAGE LINKS (POST LIST MODE) --------------------
-	mainlist_page_links( array(
-			'block_start' => '<div class="nav_pages">',
-			'block_end' => '</div>',
-			'prev_text' => '&lt;&lt;',
-			'next_text' => '&gt;&gt;',
-		) );
-	// ------------------------- END OF PREV/NEXT PAGE LINKS -------------------------
-}
-?>
-
-<?php
-// ------------------------- BODY FOOTER INCLUDED HERE --------------------------
-skin_include( '_body_footer.inc.php' );
-// Note: You can customize the default BODY footer by copying the
-// _body_footer.inc.php file into the current skin folder.
-// ------------------------------- END OF FOOTER --------------------------------
-
-
 // ---------------------------- SITE FOOTER INCLUDED HERE ----------------------------
 // If site footers are enabled, they will be included here:
 siteskin_include( '_site_body_footer.inc.php' );
