@@ -10,7 +10,7 @@
  * @copyright (c)2003-2015 by Francois Planque - {@link http://fplanque.com/}
  *
  * @package evoskins
- * @subpackage photoalbums
+ * @subpackage bootstrap_gallery_skin
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
@@ -19,16 +19,19 @@ global $Item;
 // Default params:
 $params = array_merge( array(
 		'feature_block'          => false,
-		'item_class'             => 'bPost',
-		'item_status_class'      => 'bPost',
+		'item_class'        	 => 'evo_post',
+		'item_type_class'   	 => 'evo_post__ptyp_',
+		'item_status_class' 	 => 'evo_post__',
 		'content_mode'           => 'full', // We want regular "full" content, even in category browsing: i-e no excerpt or thumbnail
 		'image_size'             => '', // Do not display images in content block - Image is handled separately
 		'url_link_text_template' => '', // link will be displayed (except player if podcast)
+		'disp_title' => true,
 	), $params );
-
+	
 ?>
 
-<div id="<?php $Item->anchor_id() ?>" class="<?php $Item->div_classes( $params ) ?>" lang="<?php $Item->lang() ?>">
+<!--<div id="<?php // $Item->anchor_id() ?>" class="<?php //$Item->div_classes( $params ) ?>" lang="<?php //fevo_post_content$Item->lang() ?>">-->
+	<div class="row single_post">
 
 	<?php
 		$Item->locale_temp_switch(); // Temporarily switch to post locale (useful for multilingual blogs)
@@ -39,20 +42,20 @@ $params = array_merge( array(
 		echo '<div class="post_images">';
 		$Item->images( array(
 				'before'              => '',
-				'before_image'        => '<div class="image_block"><div>',
+				'before_image'        => '<div class="single-image">',
 				'before_image_legend' => '<div class="image_legend">',
 				'after_image_legend'  => '</div>',
-				'after_image'         => '</div></div>',
-				'after'               => '',
+				'after_image'         => '</div>',
+				'after'               => '<div class="clear"></div>',
 				'image_size'          => $Skin->get_setting( 'single_thumb_size' ),
 				'image_align'         => 'middle',
 			) );
 		echo '</div>';
 	?>
 
-<div class="bPostContent">
+<div class="evo_post_content">
 
-	<div class="bDetails">
+	<div class="evo_details">
 
 		<?php
 			// ---------------------- POST CONTENT INCLUDED HERE ----------------------
@@ -66,7 +69,7 @@ $params = array_merge( array(
 		<?php
 			// URL link, if the post has one:
 			$Item->url_link( array(
-					'before'        => '<div class="bSmallPrint">'.T_('Link').': ',
+					'before'        => '<div class="small evo_print">'.T_('Link').': ',
 					'after'         => '</div>',
 					'text_template' => '$url$',
 					'url_template'  => '$url$',
@@ -98,54 +101,3 @@ $params = array_merge( array(
 	?>
 
 </div>
-<script type="text/javascript">
-var has_touch_event;
-window.addEventListener( 'touchstart', function set_has_touch_event ()
-{
-	has_touch_event = true;
-	// Remove event listener once fired, otherwise it'll kill scrolling
-	window.removeEventListener( 'touchstart', set_has_touch_event );
-}, false );
-
-/**
- * Change nav position to fixed or revert to static
- */
-function change_position_nav()
-{
-	if( has_touch_event )
-	{ // Don't fix the objects on touch devices
-		return;
-	}
-
-	if( nav_size )
-	{ // Navigation bar
-		if( !$nav.hasClass( 'fixed' ) && jQuery( window ).scrollTop() > $nav.offset().top - nav_top )
-		{ // Make nav as fixed if we scroll down
-			$nav.before( $navSpacer );
-			$nav.addClass( 'fixed' ).css( 'top', nav_top + 'px' );
-		}
-		else if( $nav.hasClass( 'fixed' ) && jQuery( window ).scrollTop() < $navSpacer.offset().top - nav_top )
-		{ // Remove 'fixed' class from nav if we scroll to the top of page
-			$nav.removeClass( 'fixed' ).css( 'top', '' );
-			$navSpacer.remove();
-		}
-	}
-}
-
-var $nav = jQuery( '.nav_album' );
-var nav_size = $nav.size();
-var nav_top = <?php echo ( is_logged_in() ? 23 : 0 ) ; ?>;
-var $navSpacer = $( '<div />', {
-		'class':  'nav_album_spacer',
-		'height': $nav.outerHeight( true ),
-	} );
-
-jQuery( window ).resize( function()
-{
-	change_position_nav();
-} );
-jQuery( window ).scroll( function ()
-{
-	change_position_nav();
-} );
-</script>

@@ -12,11 +12,19 @@
  * @copyright (c)2003-2015 by Francois Planque - {@link http://fplanque.com/}
  *
  * @package evoskins
- * @subpackage photoalbums
+ * @subpackage bootstrap_gallery_skin
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
+
 global $Blog;
+
+// Default params:
+$params = array_merge( array(
+		'item_class'        => 'evo_post evo_content_block',
+		'item_type_class'   => 'evo_post__ptyp_',
+		'item_status_class' => 'evo_post__',
+	), $params );
 
 // --------------------------------- START OF POSTS -------------------------------------
 // Display message if no post:
@@ -27,14 +35,11 @@ $params_no_content = array(
 		// This will display if the collection has not been made private. Otherwise we will be redirected to a login screen anyways
 		'msg_empty_not_logged_in' => T_('This site has no public contents.')
 	);
-
 // Get only root categories of this blog
-// TODO: Use $ChapterCache in a way similar to _coll_category_list.widget.php
-$chapters = get_chapters( $Blog->ID );
-
+$ChapterCache = & get_ChapterCache();
+$chapters = $ChapterCache->get_chapters( $Blog->ID, 0, true );
 // Boolean var to know when at least one post is displayed
 $no_content_to_display = true;
-
 if( ! empty( $chapters ) )
 { // Display the posts with chapters
 	foreach( $chapters as $Chapter )
@@ -52,11 +57,10 @@ if( ! empty( $chapters ) )
 			$no_content_to_display = false;
 ?>
 <div class="posts_list">
-	<div class="category_title"><a href="<?php echo $Chapter->get_permanent_url(); ?>"><?php echo $Chapter->get( 'name' ); ?></a></div>
+	<div class="category_title clear"><h2><a href="<?php echo $Chapter->get_permanent_url(); ?>"><?php echo $Chapter->get( 'name' ); ?></a></h2></div>
 <?php
 			while( $Item = & $ItemList->get_item() )
 			{ // For each blog post, do everything below up to the closing curly brace "}"
-
 				// Temporarily switch to post locale (useful for multilingual blogs)
 				$Item->locale_temp_switch();
 ?>
@@ -86,7 +90,6 @@ if( ! empty( $chapters ) )
 							.'END AS position_order',
 						'links_sql_orderby'          => 'position_order, link_order',
 					) );
-
 				if( empty( $item_first_image ) )
 				{ // No images in this post, Display an empty block
 					$item_first_image = $Item->get_permanent_link( '<b>'.T_('No pictures yet').'</b>', '#', 'album_nopic' );
@@ -95,12 +98,10 @@ if( ! empty( $chapters ) )
 				{ // No images, but some attachments(e.g. videos) are rendered by plugins
 					$item_first_image = $Item->get_permanent_link( '<b>'.T_('Click to see contents').'</b>', '#', 'album_nopic' );
 				}
-
 				// Display a title
 				echo $Item->get_title( array(
 					'before' => $item_first_image.'<br />',
 					) );
-
 				// Restore previous locale (Blog locale)
 				locale_restore_previous();
 ?>
@@ -113,7 +114,6 @@ if( ! empty( $chapters ) )
 <?php
 	}
 } // ---------------------------------- END OF POSTS ------------------------------------
-
 if( $no_content_to_display )
 { // No category and no post in this blog
 	echo $params_no_content['before']
