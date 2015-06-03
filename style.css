@@ -99,7 +99,7 @@ h2 {
 .nav.nav-tabs {
   margin-top: 0;
 }
-.widget_core_coll_title {
+header.row div:nth-child(2) {
   padding-top: 8%;
 }
 .widget_core_coll_title h1 a {
