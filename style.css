@@ -265,6 +265,9 @@ header.row div:nth-child(2) {
 .clearfix:after {
   clear: both;
 }
+.evo_post_content h4 a {
+  color: #697b94;
+}
 .widget_core_user_login #login_form .form-group {
   margin: 0;
 }
@@ -1012,9 +1015,6 @@ body {
   border-bottom: 1px solid #ffffff;
   color: #5d4a55;
 }
-.evo_post_content .panel-heading a {
-  color: #697b94;
-}
 .evo_post_content .panel-heading a:hover {
   text-decoration: underline;
 }
@@ -1039,6 +1039,7 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin: 5px;
   color: #697b94;
+  background-color: rgba(105, 123, 148, 0.1);
   -webkit-transition: all 0.25s ease-out;
   /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
   transition: all 0.25s ease-out;
@@ -1458,7 +1459,6 @@ a:focus {
   font-style: italic;
 }
 #styled_content_block .evo_comment h4 a {
-  color: #697b94 !important;
   font-size: 16px !important;
 }
 #styled_content_block .evo_comment h4 a:hover {

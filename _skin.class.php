@@ -17,6 +17,7 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
  */
 class horizon_gallery_Skin extends Skin
 {
+	var $version = '1.0';
 	
 	/**
 	 * Do we want to use style.min.css instead of style.css ?
@@ -69,12 +70,6 @@ class horizon_gallery_Skin extends Skin
 					'label' => T_('Page text color'),
 					'note' => T_('E-g: #00ff00 for green'),
 					'defaultvalue' => '#333',
-					'type' => 'color',
-				),
-				'page_link_color' => array(
-					'label' => T_('Page link color'),
-					'note' => T_('E-g: #00ff00 for green'),
-					'defaultvalue' => '#337ab7',
 					'type' => 'color',
 				),
 				'current_tab_text_color' => array(
@@ -215,34 +210,13 @@ class horizon_gallery_Skin extends Skin
 		// Text color
 		if( $text_color = $this->get_setting( 'page_text_color' ) )
 		{
-			$custom_styles[] = 'color: '.$text_color;
-		}
-		if( ! empty( $custom_styles ) )
-		{
-			$custom_css .= '	body { '.implode( ';', $custom_styles )." }\n";
-		}
-		
-		// Link color
-		if( $text_color = $this->get_setting( 'page_link_color' ) )
-		{
-			$custom_styles[] = 'color: '.$text_color;
-		}
-		if( ! empty( $custom_styles ) )
-		{
-			$custom_css .= '	body .container a { '.implode( ';', $custom_styles )." }\n";
-			$custom_css .= '	ul li a { '.implode( ';', $custom_styles )." }\n";
-			$custom_css .= "	ul li a {background-color: transparent;}\n";
-			$custom_css .= "	.ufld_icon_links a {color: #fff !important;}\n";
+			$custom_css .= '	body { color: '.$text_color."; }\n";
 		}
 		
 		// Current tab text color
 		if( $text_color = $this->get_setting( 'current_tab_text_color' ) )
 		{
-			$custom_styles[] = 'color: '.$text_color;
-		}
-		if( ! empty( $custom_styles ) )
-		{
-			$custom_css .= '	ul.nav.nav-tabs li a.selected { '.implode( ';', $custom_styles )." }\n";
+			$custom_css .= '	ul.nav.nav-tabs li a.selected { color: '.$text_color."; }\n";
 		}
 		
 		// Page background color
