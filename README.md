@@ -1,4 +1,6 @@
-<h1 align="center">Horizon Gallery skin for b2evolution CMS v6.</h1>
+## Horizon Gallery skin for b2evolution CMS v6.
+
+Link to skin: http://skins.b2evolution.net/horizon-gallery-skin
 
 <p align="center"><img src="/images/Logos/horizon-logo-dark.png?raw=true"/></p>
 
