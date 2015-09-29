@@ -1039,7 +1039,7 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin: 5px;
   color: #697b94;
-  background-color: rgba(105, 123, 148, 0.1);
+  background-color: rgba(105, 123, 148, 0);
   -webkit-transition: all 0.25s ease-out;
   /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
   transition: all 0.25s ease-out;
