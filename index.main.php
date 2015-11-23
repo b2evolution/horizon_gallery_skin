@@ -1,16 +1,21 @@
 <?php
 /**
- * This is the main/default page template.
+ * This is the main/default page template for the "Horizon" skin.
+ *
+ * This skin only uses one single template which includes most of its features.
+ * It will also rely on default includes for specific displays (like the comment form).
  *
  * For a quick explanation of b2evo 2.0 skins, please start here:
  * {@link http://b2evolution.net/man/skin-development-primer}
  *
- * It is used to display the blog when no specific page template is available to handle the request.
+ * The main page template is used to display the blog when no specific page template is available
+ * to handle the request (based on $disp).
  *
  * @package evoskins
  * @subpackage bootstrap_gallery_skin
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
+
 if( version_compare( $app_version, '6.4' ) < 0 )
 { // Older skins (versions 2.x and above) should work on newer b2evo versions, but newer skins may not work on older b2evo versions.
 	die( 'This skin is designed for b2evolution 6.4 and above. Please <a href="http://b2evolution.net/downloads/index.html">upgrade your b2evolution</a>.' );
@@ -19,8 +24,8 @@ global $Skin;
 // This is the main template; it may be used to display very different things.
 // Do inits depending on current $disp:
 skin_init( $disp );
-// TODO: move to Skin::display_init
-require_js( 'functions.js', 'blog' );	// for opening popup window (comments)
+// Check if current page has a big picture as background
+$is_pictured_page = in_array( $disp, array( 'front', 'login', 'register', 'lostpassword', 'activateinfo', 'access_denied' ) );
 // -------------------------- HTML HEADER INCLUDED HERE --------------------------
 skin_include( '_html_header.inc.php', array(
 		'arcdir_text'     => T_('Index'),
@@ -28,44 +33,36 @@ skin_include( '_html_header.inc.php', array(
 		'category_text'   => T_('Gallery').': ',
 		'categories_text' => T_('Galleries').': ',
 	) );
+// Include Google Fonts code inside ""
+echo "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>";
 // -------------------------------- END OF HEADER --------------------------------
+
+
 // ---------------------------- SITE HEADER INCLUDED HERE ----------------------------
 // If site headers are enabled, they will be included here:
 siteskin_include( '_site_body_header.inc.php' );
-// Include Google Fonts code inside ""
-echo "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>";
 // ------------------------------- END OF SITE HEADER --------------------------------
 ?>
 
-<div class="evo_container evo_container__header">
+<div class="evo_container evo_container__header" id="bg_picture">
 	<header class="row">
 		<div class="evo_container evo_container__page_top col-lg-12">
-	<?php
-		// ------------------------- "Page Top" CONTAINER EMBEDDED HERE --------------------------
-		// Display container and contents:
-		skin_container( NT_('Page Top'), array(
-				// The following params will be used as defaults for widgets included in this container:
-				'block_start'         => '<div class="evo_widget $wi_class$">',
-				'block_end'           => '</div>',
-				'block_display_title' => false,
-				'list_start'          => '<ul>',
-				'list_end'            => '</ul>',
-				'item_start'          => '<li>',
-				'item_end'            => '</li>',
-			) );
-		// ----------------------------- END OF "Page Top" CONTAINER -----------------------------
-	?>
-	
 		<?php
-			skin_widget( array(
-				// CODE for the widget:
-				'widget' => 'member_count',
-				// Optional display params
-				'before' => '(',
-				'after'  => ')',
-			) );
+			// ------------------------- "Page Top" CONTAINER EMBEDDED HERE --------------------------
+			// Display container and contents:
+			skin_container( NT_('Page Top'), array(
+					// The following params will be used as defaults for widgets included in this container:
+					'block_start'         => '<div class="evo_widget $wi_class$">',
+					'block_end'           => '</div>',
+					'block_display_title' => false,
+					'list_start'          => '<ul>',
+					'list_end'            => '</ul>',
+					'item_start'          => '<li>',
+					'item_end'            => '</li>',
+				) );
+			// ----------------------------- END OF "Page Top" CONTAINER -----------------------------
 		?>
-	</div>
+		</div>
 	
 	<?php
 		// ------------------------- "Header" CONTAINER EMBEDDED HERE --------------------------
@@ -82,13 +79,13 @@ echo "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700
 	</header>
 </div>
 
-<div class="container">
+<div class="evo_container evo_container__menu">
 <!-- BLOG NAVIGATION MENU -->
-	<nav class="col-md-12">
-		<div class="drop">
-			<input type="checkbox" id="toggle" />
-			<label for="toggle" class="toggle" onclick></label>
-			<ul class="menu">
+		<nav class="col-md-12">
+			<div class="drop">
+				<input type="checkbox" id="toggle" />
+				<label for="toggle" class="toggle" onclick></label>
+				<ul class="menu">
 		<?php
 			// ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
 			// Display container and contents:
@@ -109,13 +106,13 @@ echo "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700
 				) );
 			// ----------------------------- END OF "Menu" CONTAINER -----------------------------
 		?>
-			</ul>
-		</div>
-	</nav>
+				</ul>
+			</div>
+		</nav>
 </div>
 
 
-<div class="container main">
+<div class="container">
 	<?php
 		if( $disp == 'single' )
 		{ // ------------------- NAVIGATION BAR FOR ALBUM(POST) -------------------
@@ -302,7 +299,8 @@ echo "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700
 <div class="footer-wrapper">
 <footer class="row">
 	<!-- =================================== START OF FOOTER =================================== -->
-	<div class="col-md-12 center">
+	<div class="container">
+		<div class="col-md-12">
 
 		<div class="evo_container evo_container__footer">
 		<?php
@@ -316,7 +314,7 @@ echo "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700
 		?>
 		</div>
 
-		<p>
+		<p class="center">
 			<?php
 				// Display footer text (text can be edited in Blog Settings):
 				$Blog->footer_text( array(
@@ -366,7 +364,8 @@ echo "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700
 					'img_height'  => 32,
 				) );
 		?>
-	</div><!-- .col -->
+		</div><!-- .col -->
+	</div><!-- .container -->
 	
 </footer><!-- .row -->
 </div>

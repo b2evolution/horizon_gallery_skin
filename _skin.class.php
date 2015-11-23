@@ -5,7 +5,7 @@
  *
  * This file is part of the b2evolution project - {@link http://b2evolution.net/}
  *
- * @package evoskins
+ * @package skins
  * @subpackage bootstrap_gallery_skin
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
@@ -66,6 +66,14 @@ class horizon_gallery_Skin extends Skin
 		load_funcs( 'files/model/_image.funcs.php' );
 
 		$r = array_merge( array(
+				/*
+				NOTE: COMMENTED OUT UNTIL FIXED IN THE NEXT RELEASE!
+				'front_bg_image' => array(
+					'label' => T_('Background image'),
+					'defaultvalue' => 'images/landscape-bg.jpg',
+					'type' => 'text',
+					'size' => '50'
+				),
 				'page_text_color' => array(
 					'label' => T_('Page text color'),
 					'note' => T_('E-g: #00ff00 for green'),
@@ -77,7 +85,7 @@ class horizon_gallery_Skin extends Skin
 					'note' => T_('E-g: #ff6600 for orange'),
 					'defaultvalue' => '#333',
 					'type' => 'color',
-				),
+				),*/
 				'page_bg_color' => array(
 					'label' => T_('Page background color'),
 					'note' => T_('E-g: #ff0000 for red'),
@@ -190,44 +198,42 @@ class horizon_gallery_Skin extends Skin
 
 		// Request some common features that the parent function (Skin::display_init()) knows how to provide:
 		parent::display_init( array(
-				'jquery', 							// Load jQuery
-				'font_awesome', 					// Load Font Awesome (and use its icons as a priority over the Bootstrap glyphicons)
-				'bootstrap', 						// Load Bootstrap (without 'bootstrap_theme_css')
-				'bootstrap_evo_css', 			// Load the b2evo_base styles for Bootstrap (instead of the old b2evo_base styles)
-				'bootstrap_messages',			// Initialize $Messages Class to use Bootstrap styles
-				'style_css', 						// Load the style.css file of the current skin
-				'colorbox',							// Load Colorbox (a lightweight Lightbox alternative + customizations for b2evo)
-				'bootstrap_init_tooltips', 	// Inline JS to init Bootstrap tooltips (E.g. on comment form for allowed file extensions)
+				'jquery',                  // Load jQuery
+				'font_awesome',            // Load Font Awesome (and use its icons as a priority over the Bootstrap glyphicons)
+				'bootstrap',               // Load Bootstrap (without 'bootstrap_theme_css')
+				'bootstrap_evo_css',       // Load the b2evo_base styles for Bootstrap (instead of the old b2evo_base styles)
+				'bootstrap_messages',      // Initialize $Messages Class to use Bootstrap styles
+				'style_css',               // Load the style.css file of the current skin
+				'colorbox',                // Load Colorbox (a lightweight Lightbox alternative + customizations for b2evo)
+				'bootstrap_init_tooltips', // Inline JS to init Bootstrap tooltips (E.g. on comment form for allowed file extensions)
+				'disp_auto',               // Automatically include additional CSS and/or JS required by certain disps (replace with 'disp_off' to disable this)
 			) );
+			
+		require_js( 'functions.js', 'blog' );	// for opening popup window (comments)
 
 		// Skin specific initializations:
-
+		global $media_url, $media_path;
+			
 		// Add custom CSS:
 		$custom_css = '';
-		// ===== Custom page styles: =====		
-		$custom_styles = array();
 		
-		// Text color
-		if( $text_color = $this->get_setting( 'page_text_color' ) )
-		{
-			$custom_css .= '	body { color: '.$text_color."; }\n";
+		$bg_image = $this->get_setting( 'front_bg_image' );
+		if( ! empty( $bg_image ) && file_exists( $bg_image ) )
+		{ // Custom body background image:
+			$custom_css .= '#bg_picture { background-image: url('.$bg_image.") }\n";
 		}
-		
-		// Current tab text color
+		if( $text_color = $this->get_setting( 'page_text_color' ) )
+		{ // Text color
+			$custom_css .= 'body, .evo_comment_text, .evo_container__footer p { color: '.$text_color."; }\n";
+		}
 		if( $text_color = $this->get_setting( 'current_tab_text_color' ) )
-		{
+		{ // Current tab text color
 			$custom_css .= '	ul.nav.nav-tabs li a.selected { color: '.$text_color."; }\n";
 		}
-		
-		// Page background color
 		if( $bg_color = $this->get_setting( 'page_bg_color' ) )
-		{
-			$custom_styles[] = 'background-color: '.$bg_color;
-		}
-		if( ! empty( $custom_styles ) )
-		{
-			$custom_css .= '	body { '.implode( ';', $custom_styles )." }\n";
-		}		
+		{ // Custom page background color:
+			$custom_css .= 'body { background-color: '.$bg_color." }\n";
+		}	
 		
 		global $thumbnail_sizes;
 		$posts_thumb_size = $this->get_setting( 'posts_thumb_size' );
@@ -248,14 +254,15 @@ class horizon_gallery_Skin extends Skin
 			/*$custom_css .= '	.posts_list .evo_post b { width:'.( $thumbnail_sizes[ $single_thumb_size ][1] - 20 ).'px;'
 				.'height:'.( $thumbnail_sizes[ $single_thumb_size ][2] - 20 ).'px'." }\n";*/
 		}
-		if( !empty( $custom_css ) )
-		{
-			$custom_css = '<style type="text/css">
-	<!--
-'.$custom_css.'	-->
-	</style>';
-			add_headline( $custom_css );
-		}
+		if( ! empty( $custom_css ) )
+		{ // Function for custom_css:
+		$custom_css = '<style type="text/css">
+<!--
+'.$custom_css.'
+-->
+		</style>';
+		add_headline( $custom_css );
+		}			
 	}
 	/**
 	 * Determine to display status banner or to don't display
