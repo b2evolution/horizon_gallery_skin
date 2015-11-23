@@ -59,14 +59,18 @@ h2 {
 .evo_post_comment_notification p a,
 .form-control-static strong a,
 .evo_print a,
-.evo_post_feedback_feed_msg p a {
+.evo_post_feedback_feed_msg p a,
+.disp_help .container a,
+.disp_tags .container a {
   color: #697b94 !important;
 }
 .evo_post__full a:hover,
 .evo_post_comment_notification p a:hover,
 .form-control-static strong a:hover,
 .evo_print a:hover,
-.evo_post_feedback_feed_msg p a:hover {
+.evo_post_feedback_feed_msg p a:hover,
+.disp_help .container a:hover,
+.disp_tags .container a:hover {
   text-decoration: underline;
 }
 .form-control-static strong a {
@@ -1403,12 +1407,19 @@ body {
   text-decoration: none;
   color: #333333;
 }
-.footer-wrapper p a {
+.footer-wrapper a {
   text-decoration: none;
-  color: #697b94;
+  color: #697b94 !important;
+  background-color: transparent !important;
 }
-.footer-wrapper p a:hover {
-  text-decoration: underline;
+.footer-wrapper a:hover {
+  text-decoration: underline !important;
+}
+.footer-wrapper h3 {
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #5d4a55;
 }
 .bt-content {
   font-size: 14px;
@@ -1586,4 +1597,16 @@ a:focus {
 .disp_posts .single_post {
   margin-left: 15px;
   margin-right: 15px;
+}
+.search_content_wrap {
+  margin-left: 50px;
+}
+.popover ul li,
+.popover a {
+  list-style-type: none;
+  text-transform: uppercase;
+  font-style: italic;
+}
+.popover img {
+  box-shadow: none !important;
 }

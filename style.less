@@ -54,7 +54,7 @@ h2 {
 	color: #5d4a55;
 	text-transform: uppercase;
 }
-.evo_post__full a, .evo_post_comment_notification p a, .form-control-static strong a, .evo_print a, .evo_post_feedback_feed_msg p a {
+.evo_post__full a, .evo_post_comment_notification p a, .form-control-static strong a, .evo_print a, .evo_post_feedback_feed_msg p a, .disp_help .container a, .disp_tags .container a {
 	color: #697b94 !important;
 	&:hover {
 		text-decoration: underline;
@@ -1380,13 +1380,20 @@ html, body {
 	p {
 		text-decoration: @no-decoration;
 		color: @color-base;
-		a {
-			text-decoration: none;
-			color: #697b94;
-			&:hover {
-				text-decoration: underline;
-			}
+	}
+	a {
+		text-decoration: none;
+		color: #697b94 !important;
+		background-color: transparent !important;
+		&:hover {
+			text-decoration: underline !important;
 		}
+	}
+	h3 {
+		font-size: 22px;
+		letter-spacing: 0.5px;
+		text-transform: uppercase;
+		color: #5d4a55;
 	}
 }
 
@@ -1561,4 +1568,17 @@ a:focus {
 .disp_catdir .posts_list, .disp_posts .single_post {
 	margin-left: 15px;
 	margin-right: 15px;
+}
+.search_content_wrap {
+	margin-left: 50px;
+}
+.popover {
+	ul li, a {
+		list-style-type: none;
+		text-transform: uppercase;
+		font-style: italic;
+	}
+	img {
+		box-shadow: none !important;
+	}
 }
