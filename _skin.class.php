@@ -252,7 +252,7 @@ class horizon_gallery_Skin extends Skin
 		}
 		if( $text_color = $this->get_setting( 'page_text_color' ) )
 		{ // Text color
-			$custom_css .= 'body, .evo_comment_text, .evo_container__footer p { color: '.$text_color."; }\n";
+			$custom_css .= '#skin_wrapper, .evo_comment_text, .evo_container__footer p { color: '.$text_color."; }\n";
 		}
 		if( $text_color = $this->get_setting( 'current_tab_text_color' ) )
 		{ // Current tab text color
@@ -260,7 +260,7 @@ class horizon_gallery_Skin extends Skin
 		}
 		if( $bg_color = $this->get_setting( 'page_bg_color' ) )
 		{ // Custom page background color:
-			$custom_css .= 'body { background-color: '.$bg_color." }\n";
+			$custom_css .= '#skin_wrapper { background-color: '.$bg_color." }\n";
 		}	
 		
 		global $thumbnail_sizes;
