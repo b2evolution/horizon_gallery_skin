@@ -73,7 +73,7 @@ h2 {
 // Header + Navigation
 .evo_container__header {
 	margin-bottom: 20px;
-	margin-top: -15px;
+	//margin-top: -15px;
 	text-align: center;
 	padding-bottom: 15%;
 	& > header.row > .evo_widget {
@@ -496,7 +496,7 @@ textarea.message_text {
 	}
 }
 #comment_preview {
-	background-color: #FFF;
+	background-color: transparent;
 }
 #comment_date_field .panel {
 	border: none;
@@ -1199,18 +1199,24 @@ html, body {
 		margin-left: 0px;
 		margin-right: 0px;
 	}
+	.menu > li > a {
+		padding: 15px 15px !important;
+	}
+	.evo_container__menu {
+		margin-bottom: 10px;
+	}
 }
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 991px){
 	.menu { display: none; opacity: 0; width: 100%; position: absolute; right: 0; border-radius: 0px !important; }
 	.menu > li { display: block; width: 100%; margin: 0; }
 	.menu > li > a { display: block; width: 100%; text-decoration: none; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 	.toggle { display: block; position: relative; cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
 	#toggle:checked ~ .menu { display: block; opacity: 1;}
 }
-@media only screen and (max-width: 768px){
-	.widget_core_coll_title { 
-		padding-top: 10% !important; 
-	}
+@media only screen and (max-width: 991px){
+	// .widget_core_coll_title { 
+		// padding-top: 10% !important; 
+	// }
 	.search_field {
 		max-width: 500px !important;
 	}	
@@ -1291,6 +1297,7 @@ html, body {
 	}
 	.menu li a.selected {
 			color: @white !important;
+			
 	}
 	div.image_index div {
 		margin: 10px;
@@ -1562,6 +1569,15 @@ a:focus {
 .panel, .panel-body {
 	background-color: transparent;
 }
+	main > .action_messages {
+		.alert {
+			margin: 10px 15px;
+			
+			&.alert-dismissible .close {
+				right: -21px;
+			}
+		}
+	}
 .disp_page .single_post {
 	background: transparent !important;
 }
