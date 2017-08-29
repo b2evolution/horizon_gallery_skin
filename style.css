@@ -89,6 +89,7 @@ h2 {
   padding-right: 15px;
 }
 #bg_picture {
+  background: url(images/landscape-bg.jpg);
   top: 0;
   left: 0;
   right: 0;
@@ -98,7 +99,6 @@ h2 {
   background-position: center center;
   z-index: -999999;
   background-size: cover;
-  background: url(images/landscape-bg.jpg) no-repeat center center fixed;
 }
 #bg_picture img {
   display: none;

@@ -116,6 +116,6 @@ module.exports = function(grunt) {
    grunt.loadNpmTasks('grunt-browser-sync');
 
 	// Default task(s):
-	grunt.registerTask( 'default', [ 'browserSync', 'less','cssmin', 'autoprefixer', 'watch'] );
+	grunt.registerTask( 'default', [ 'browserSync', 'less','cssmin', 'autoprefixer'] );
 
 };
