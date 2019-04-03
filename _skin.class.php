@@ -50,7 +50,7 @@ class horizon_gallery_Skin extends Skin
 	 */
 	function get_api_version()
 	{
-		return 6;
+		return 7;
 	}
 	
 	
